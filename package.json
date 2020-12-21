@@ -1,0 +1,13 @@
+{
+  "name": "OttSpotPings",
+  "description": "A bot that pings you when you say ping me, because my friends asked for it.",
+  "version": "1.0",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "discord.js": "11.1.0",
+    "request": "2.81.0"
+  }
+}
