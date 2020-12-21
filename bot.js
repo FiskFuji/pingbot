@@ -8,31 +8,38 @@ client.on('ready', () => {
 client.on('message', async message => {
   if (message.author.bot) return;
 
-  function sleep(milliseconds) {
-    return new Promise(resolve => {
-      setTimeout(resolve, milliseconds);
-    });
-  }
-
   if (message.content === 'ping me') {
+    let maxPingies = 3;
+
     client.user.setActivity(`Pinging ${message.author.username}`);
     console.log(`Pinged: ${message.author.username}`);
-
     message.channel.send('You pinged?');
-    sleep(2000);
-    message.channel.send(`<@${message.author.id}`);
+
+    let pingies = 0;
+    let intervalId = setInterval(async() => {
+      message.channel.send(`<@${message.author.id}`);
+
+      if (++pingies === maxPingies) {
+        clearInterval(intervalId);
+      }
+    }, 1000);
   }
 
   if (message.content === 'ping me daddy') {
-    let pingies = Math.floor(Math.random() * 5) + 1;  // no 0 pings
+    let maxPingies = Math.floor(Math.random() * 10) + 1;  // no 0 pings
 
     client.user.setActivity(`Can't get enough pings`);
     console.log(`Pinging: ${message.author.username} ${pingies} times.`);
+    message.chanel.send(`Ooooh, more pings!`);
 
-    for (let i = 0; i < pingies; ++i) {
+    let pingies = 0;
+    let intervalId = setInterval(async() => {
       message.channel.send(`<@${message.author.id}`);
-      sleep(1000);
-    }
+
+      if (++pingies === maxPingies) {
+        clearInterval(intervalId);
+      }
+    }, 1000);
   }
 });
 
