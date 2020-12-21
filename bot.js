@@ -20,17 +20,19 @@ client.on('message', async message => {
   }
 
   if (message.author.bot) return;
+  let pingChannel = client.channels.find(c => c.name === 'pingies');
 
-  if (message.content === 'ping me') {
+  if (message.content.toLowerCase() === 'ping me') {
+    if (!pingChannel) return;
     let maxPingies = 3;
 
     console.log(`Pinged: ${message.author.username}`);
     await sleep(5000);
-    message.channel.send('You pinged? (3)');
+    pingChannel.send('You pinged? (3)');
 
     let pingies = 0;
     let intervalId = setInterval(async() => {
-      message.channel.send(`<@${message.author.id}>`);
+      pingChannel.send(`<@${message.author.id}>`);
 
       if (++pingies === maxPingies) {
         clearInterval(intervalId);
@@ -38,16 +40,17 @@ client.on('message', async message => {
     }, 1000);
   }
 
-  if (message.content === 'ping me daddy') {
+  if (message.content.toLowerCase() === 'ping me daddy') {
+    if (!pingChannel) return;
     let maxPingies = Math.floor(Math.random() * 10) + 1;  // no 0 pings
 
     console.log(`Pinging: ${message.author.username} ${maxPingies} times.`);
     await sleep(5000);
-    message.channel.send(`Moar pings! (${maxPingies})`);
+    pingChannel.send(`Moar pings! (${maxPingies})`);
 
     let pingies = 0;
     let intervalId = setInterval(async() => {
-      message.channel.send(`<@${message.author.id}>`);
+      pingChannel.send(`<@${message.author.id}>`);
 
       if (++pingies === maxPingies) {
         clearInterval(intervalId);
@@ -55,16 +58,17 @@ client.on('message', async message => {
     }, 1000);
   }
 
-  if (message.content === 'pingies uwu' || message.content === 'pingies? uwu') {
+  if (message.content.toLowerCase() === 'pingies uwu' || message.content.toLowerCase() === 'pingies? uwu') {
+    if (!pingChannel) return;
     let maxPingies = Math.floor(Math.random() * 35) + 1;  // no 0 pings
 
     console.log(`Pinging: ${message.author.username} ${maxPingies} times.`);
     await sleep(5000);
-    message.channel.send(`uwu yus pingies (${maxPingies})`);
+    pingChannel.send(`uwu yus pingies (${maxPingies})`);
 
     let pingies = 0;
     let intervalId = setInterval(async() => {
-      message.channel.send(`<@${message.author.id}>`);
+      pingChannel.send(`<@${message.author.id}>`);
 
       if (++pingies === maxPingies) {
         clearInterval(intervalId);
